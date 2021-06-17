@@ -367,7 +367,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/location
 spring.datasource.username=root
 spring.datasource.password=
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-#you should turn it to 'update' after
+#you should turn it to 'None' after
 spring.jpa.hibernate.ddl-auto=create-drop
 
 #il etait 5
