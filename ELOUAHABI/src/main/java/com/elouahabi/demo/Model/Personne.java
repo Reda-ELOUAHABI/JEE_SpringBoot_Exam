@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -24,6 +26,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Personne {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +65,42 @@ private Poste poste;
 private Set<Compte> comptes = new HashSet<>(); //pour qu'il soit un objet null lors des rappelles 
 
 
+@OneToOne()
+@JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+private Mariage mariage;
+
+//@OneToOne(mappedBy = "personneFemme")
+//private Mariage mariaged_autre;
+
+//@OneToOne
+//@JoinColumn(name ="id",referencedColumnName="idMariage")
+//private Mariage mariage;
+
+
+
+///Two Parent + Many Children
+//private List<Enfant> enfants = new ArrayList<Enfant>();
+//
+//private List<Parent> parents = new ArrayList<Parent>();
+//
+
+//
+//
+//public Personne(Long id, @NotNull String nom, @NotNull String prenom, Boolean marie, Boolean chomeur, Genre genre,
+//		LocalDate date_de_naissance, Integer age, Mariage mariage, List<Enfant> enfants, List<Parent> parents) {
+//	super();
+//	this.id = id;
+//	this.nom = nom;
+//	Prenom = prenom;
+//	this.marie = marie;
+//	this.chomeur = chomeur;
+//	this.genre = genre;
+//	this.date_de_naissance = date_de_naissance;
+//	this.age = age;
+//	this.mariage = mariage;
+//	this.enfants = enfants;
+//	this.parents = parents;
+//}
 public Personne(Long id, @NotNull String nom, @NotNull String prenom, Boolean marie, Boolean chomeur, Genre genre,
 		LocalDate date_de_naissance, Integer age) {
 	super();
@@ -88,16 +127,7 @@ public Personne( @NotNull String nom, @NotNull String prenom, Boolean marie, Boo
 
 
 
-@OneToOne()
-@JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-private Mariage mariage;
 
-//@OneToOne(mappedBy = "personneFemme")
-//private Mariage mariaged_autre;
-
-//@OneToOne
-//@JoinColumn(name ="id",referencedColumnName="idMariage")
-//private Mariage mariage;
 
 public Personne() {
 	super();
@@ -167,6 +197,47 @@ public Integer getAge() {
 public void setAge(Integer age) {
 	this.age = age;
 }
+
+
+
+public Set<Societe> getSocietes() {
+	return societes;
+}
+public void setSocietes(Set<Societe> societes) {
+	this.societes = societes;
+}
+public Poste getPoste() {
+	return poste;
+}
+public void setPoste(Poste poste) {
+	this.poste = poste;
+}
+public Set<Compte> getComptes() {
+	return comptes;
+}
+public void setComptes(Set<Compte> comptes) {
+	this.comptes = comptes;
+}
+public Mariage getMariage() {
+	return mariage;
+}
+public void setMariage(Mariage mariage) {
+	this.mariage = mariage;
+}
+//public List<Enfant> getEnfants() {
+//	return enfants;
+//}
+//public void setEnfants(List<Enfant> enfants) {
+//	this.enfants = enfants;
+//}
+//public List<Parent> getParents() {
+//	return parents;
+//}
+//public void setParents(List<Parent> parents) {
+//	this.parents = parents;
+//}
+
+
 
 @Override
 public String toString() {

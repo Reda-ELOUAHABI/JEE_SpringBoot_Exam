@@ -37,9 +37,9 @@ MariageRepository mr;
 		return args -> {
 		System.out.println("Start*****\n\n");
 		
-		Personne p = new Personne(1L, "EL OUAHaABI", "Rda", true, true, null, LocalDate.of(1998, 6, 21), 23);
+		Personne p = new Personne(1L, "EL OUAHaABI", "Rda", true, true, Genre.homme, LocalDate.of(1998, 6, 21), 23);
 		pr.save(p);
-		Personne p1 = new Personne(2L, "FLAN ", "FLANI", true, false, null, LocalDate.of(1928, 5, 10), 23);
+		Personne p1 = new Personne(2L, "FLAN ", "FLANI", true, false, Genre.femme, LocalDate.of(1928, 5, 10), 23);
 		pr.save(p1);
 		System.out.println(pr.findAll());
 		//Mon Mariage HAha
