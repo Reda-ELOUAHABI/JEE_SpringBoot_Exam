@@ -322,12 +322,12 @@ public List<personne>  findBuNameAndByPrenom( @Param(value ="nom") String nom,@P
 
 
 
-Themleaf :
+/*Themleaf :
 
 class _> annotation -> repository -> controller [acion with th:action ..] 
 autobinging .. 
 soringRoo = fichier txt [like diag des class => il genere tout le code]
-
+*/
 // th:text object action
 
 
@@ -354,11 +354,11 @@ security
 thymeleaf
 web
 validator 
-
+/*
 Sppring Actuator Pour les Tests
 Validator : valider les data en interaction avec la base select/insert
 On disactive : devtools [a la fin _controler ]  +security [a la fin]
-
+*/
 
 /////
 #dans les problemes de timezone..
@@ -394,5 +394,43 @@ Page : import org.springframework.data.domain.Page;
 Pageable : import org.springframework.data.domain.Pageable;
 Make sure all your package are under the package containing main class
 @Enumerated(EnumType.STRING) : enregister les index des Enum en String ps ph.. not in int
+ class dog exten Animale , Id de dog est deja l'Id de l'Animal , pas besoin de faire un deuxieme id.
+
+ @Id @GeneratedValue(strategy=GenerationType.IDENTITY) long id;
+ dans les jointure :
+ import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+/**ManyTomany */
+Dans Une entite :
+ @ManyToMany(fetch=FetchType.EAGER)
+	 @JoinTable(
+			 name="Profs_Matieres",
+			 joinColumns= @JoinColumn(name="id_matiere"),//la colonne qui va faire la jointure
+			 inverseJoinColumns =@JoinColumn(name="Id_Professeur")//
+			 )
+	 private Set<Professeur> professeurs = new HashSet<>();
+////
+///
+//
+//
+///
+////
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "professeurs[l'objet exact]")
+	private Set<Matiere> matires = new HashSet<Matiere>();
 
 
+/**OneToOne */
+@OnetoOne()
+@JoinColumn(
+    name="matricule[attribut de jointure de class currente _Doit etre la meme cote sql (ou cas ou on a fait @Colom(name="coucou") private long cava => il doit etre coucou))_!!_]"),
+    ReferencedColomnName ='id',//puisque il vont etre des cle  etrangere d'autre table , il ne faut pas les toucher
+    insertable=false,
+///
+//
+//
+///
+	@OneToOne(mappedBy = "compte")
+	private Personne personne;
+    //Pay attention ici , il faut cree une personne Avant que son Compte
+
+/*OneToMany*/

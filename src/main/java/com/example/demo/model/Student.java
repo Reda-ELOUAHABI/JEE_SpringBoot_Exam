@@ -27,4 +27,27 @@ public class Student extends Personne {
 		AnneeReserve = anneeReserve;
 	}
 
+	@Override
+	public String toString() {
+		return "Student [niveau=" + niveau + ", AnneeReserve=" + AnneeReserve + ", toString()=" + super.toString()
+				+ "]";
+	}
+
+	public Long getNiveau() {
+		return niveau;
+	}
+
+	public void setNiveau(Long niveau) {
+		this.niveau = niveau;
+	}
+
+	public boolean isAnneeReserve() {
+		return AnneeReserve;
+	}
+
+	public void setAnneeReserve(boolean anneeReserve) {
+		AnneeReserve = anneeReserve;
+	}
+	
+
 }

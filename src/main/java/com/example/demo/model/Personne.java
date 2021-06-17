@@ -6,10 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED) //Why
+@Inheritance(strategy = InheritanceType.JOINED) 
+//Why => pour la type de jointure avec ses fils : Student and Professeur
 public class Personne {
 
 	@Id
@@ -23,6 +26,18 @@ public class Personne {
 	private LocalDate date_naissance;
 	
 	//private int age;
+	
+//	@OneToOne
+//	@JoinColumn(name="matricule" ,
+//	referencedColumnName = "id",
+//	insertable = false,
+//	updatable = false //INDISPENSABLE
+//			)
+//	private Compte compte;
+	
+	@OneToOne()
+	@JoinColumn(name = "matricule", referencedColumnName = "id", insertable = false, updatable = false)
+	private Compte compte;
 
 
 	public Personne() {
@@ -35,6 +50,14 @@ public class Personne {
 		this.nom = nom;
 		this.prenom = prenom;
 		setDate_naissance(date_naissance);
+	}
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
 	}
 
 	public String getPrenom() {
