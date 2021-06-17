@@ -21,7 +21,8 @@
 						<th>genre</th>
 						<th>date_Naissance</th>
 						<th>Age</th>
-						
+					<!--	<th>Compte</th>
+						<th>Societe</th>-->
 						
 					</tr>
 					<tr th:each="e:${listPersonnes}">
@@ -32,6 +33,8 @@
 						<td th:text="${e.genre}"></td>
 						<td th:text="${e.date_de_naissance}"></td>
 						<td th:text="${e.age}"></td>
+					<!--	<td th:text="${e.compte.solde}"></td>
+						<td th:text="${e.societe.id}"></td>-->
 					</tr>
 				</table>
 			</div>

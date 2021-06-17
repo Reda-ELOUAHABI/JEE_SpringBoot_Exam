@@ -57,7 +57,7 @@ private Poste poste;
 
 //
 //
-//Le code de ManyToMany qui ne marche pas malheureusement
+
 //
 //
 
@@ -101,6 +101,8 @@ private Mariage mariage;
 //	this.enfants = enfants;
 //	this.parents = parents;
 //}
+
+
 public Personne(Long id, @NotNull String nom, @NotNull String prenom, Boolean marie, Boolean chomeur, Genre genre,
 		LocalDate date_de_naissance, Integer age) {
 	super();
