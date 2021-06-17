@@ -1,8 +1,11 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,6 +14,10 @@ public class Student extends Personne {
 	private Long niveau = 2L;
 	@NotNull
 	private boolean AnneeReserve;
+	
+	 @OneToMany(mappedBy="student")
+	    private List<Note> notes =new ArrayList<>(); //pour qu'il soit un objet null lors des rappelles 
+
 
 	public Student() {
 		super();

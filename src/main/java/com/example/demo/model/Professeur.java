@@ -1,7 +1,9 @@
 package com.example.demo.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,6 +28,11 @@ public class Professeur extends Personne {
 	
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "professeurs")
 	private Set<Matiere> matires = new HashSet<Matiere>();
+	
+	
+//	@OneToMany(mappedBy="professeur")
+//    private List<Note> notes =new ArrayList<>(); //pour qu'il soit un objet null lors des rappelles 
+
 	
 	public Professeur(@NotNull int numSomme,  int indice) {
 		super();

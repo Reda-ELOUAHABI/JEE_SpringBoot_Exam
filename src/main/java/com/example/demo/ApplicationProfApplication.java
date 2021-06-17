@@ -58,7 +58,7 @@ public class ApplicationProfApplication {
 			System.out.println(pr.findAll());
 			Professeur pro = new Professeur(34567L, "Belouadha", "Fatime-Zahra", LocalDate.of(2000, 1, 1),10 ,GradeType.PES);
 			prr.save(pro);
-			System.out.println(prr.findAll());
+			System.out.println(prr.findAll()); 
 			
 			Student st1= new Student(45678L, "El OUAHABI", "Reda", LocalDate.of(2000, 8 ,1),19L,false);
 			st.save(st1);

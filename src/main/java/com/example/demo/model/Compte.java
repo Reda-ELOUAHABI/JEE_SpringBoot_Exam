@@ -11,6 +11,10 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 public class Compte {
+//	public Compte(String string, String string2, Professeur prof) {
+//		// TODO Auto-generated constructor stub
+//	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	long id;
