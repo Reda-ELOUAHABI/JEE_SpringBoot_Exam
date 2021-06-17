@@ -408,7 +408,8 @@ Dans Une entite :
 			 joinColumns= @JoinColumn(name="id_matiere"),//la colonne qui va faire la jointure
 			 inverseJoinColumns =@JoinColumn(name="Id_Professeur")//
 			 )
-	 private Set<Professeur> professeurs = new HashSet<>();
+	 private Set<Professeur> professeurs = new HashSet<Professeur>();
+   
 ////
 ///
 //
@@ -434,3 +435,139 @@ Dans Une entite :
     //Pay attention ici , il faut cree une personne Avant que son Compte
 
 /*OneToMany*/
+
+//https://github.com/EMI-PI-s4-grp8/ApplicationLocation.git
+//https://github.com/Reda-ELOUAHABI/JEE_SpringBoot_Exam.git
+
+	@RequestMapping(value = "/ajouterprofesseur", method = RequestMethod.POST)
+	public String ajouterNote(Model model, Long matricule, String nom, String prenom, String datenaissance,
+			int numSomme, GradeType grade, String email, @RequestParam("password" d ,defaultValue="123")String password) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[02:28, 17/06/2021] soufiane alamou: <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    List of all students
+    <form th:action="@{/etudiants}" method="get">
+        <label>Chercher un etudiant par Nom:</label><br>
+        <input type="text" name="nomStudent"><br>
+        <input type="submit" value="Chercher">
+    </form>
+    <table>
+        <thead>
+        <tr>
+            <th><a th:href =@{/etudiantsTri} >Nom</a></th>
+            <th>Prenom</th>
+            <th>Matricule</th>
+            <th>Date naissance</th>
+            <th>niveau</th>
+            <th>Anne de reserve ? </th>
+            <th>Notes de l'etudiant</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}" >
+                <td th:text="${student.Nom}"></td>
+                <td th:text="${student.Prenom}"></td>
+                <td th:text="${student.Matricule}"></td>
+                <td th:text="${student.date_naissance}"></td>
+                <td th:text="${student.niveau}"></td>
+                <td th:if="${student.anneeReserve == 0}">Oui</td>
+                <td th:unless="${student.anneeReserve == 0}">Non</td>
+                <td><a th:href="@{showNotes/{matricule}(matricule=${student.matricule})}">Consulter les notes de cet etudiant</a></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+</html>
+
+import com.example.demo.Model.Etudiant;
+import com.example.demo.Model.Note;
+import com.example.demo.Repository.EtudiantRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
+
+@Controller
+@RequestMapping("/")
+public class StudentController {
+    @Autowired
+    private EtudiantRepo etudiantRepo;
+
+    @RequestMapping(value = "/etudiants", method = RequestMethod.GET)
+    public String allStudent(Model model, String nomStudent){
+        if(nomStudent!= null){
+            model.addAttribute("students", this.etudiantRepo.findByNom(nomStudent));
+        }
+        else{
+            model.addAttribute("students",this.etudiantRepo.findAll());
+        }
+        return "Students";
+    }
+    @GetMapping("/showNotes/{matricule}")
+    public String showNotes(@PathVariable(value = "matricule") int matricule, Model model){
+        Etudiant etudiant = this.etudiantRepo.findById(matricule).get();
+        List<Note> notesEtudiant = etudiant.getNotes();
+        model.addAttribute("notes", notesEtudiant);
+        return "NotesEtudiants";
+    }
+    @RequestMapping(value = "/etudiantsTri", method = RequestMethod.GET)
+    public String allStudentTri(Model model){
+        model.addAttribute("students", this.etudiantRepo.findAllByOrderByNom());
+        return "Students";
+    }
+}
+
+
+import com.example.demo.Model.Etudiant;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface EtudiantRepo extends JpaRepository<Etudiant, Integer> {
+    List<Etudiant> findByNom(String nom);
+    List<Etudiant> findAllByOrderByNom();
+
+    //@Query(value = "SELECT e FROM Etudiant e ORDER BY e.nom")
+    @Query(nativeQuery = true, value = "SELECT * FROM etudiant ORDER BY nom")
+    List<Etudiant> etudiantTri();
+
+}
