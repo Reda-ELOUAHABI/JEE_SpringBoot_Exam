@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<title>Personnes</title>
+</head>
+<body>
+<div id="home-main-content">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Liste des Personnes</div>
+			
+			
+			<div class="panel-body">
+				<table class="table table-striped">
+					<tr>
+						<th>nom</th>
+						<th>Prenom</th>
+						<th>marie</th>
+						<th>chaumeur</th>
+						<th>genre</th>
+						<th>date_Naissance</th>
+						<th>Age</th>
+						
+						
+					</tr>
+					<tr th:each="e:${listPersonnes}">
+						<td th:text="${e.nom}"></td>
+						<td th:text="${e.prenom}"></td>
+					<td th:text="${e.marie}"></td>
+						<td th:text="${e.chomeur}"></td>
+						<td th:text="${e.genre}"></td>
+						<td th:text="${e.date_de_naissance}"></td>
+						<td th:text="${e.age}"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
